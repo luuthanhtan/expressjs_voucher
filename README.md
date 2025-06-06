@@ -64,4 +64,4 @@ Check for typescript errors.
 
 - If `npm run dev` gives you issues with bcrypt on MacOS you may need to run: `npm rebuild bcrypt --build-from-source`. 
 
-### `npm install express mongoose dotenv`
+http://localhost:3000/api-docs/
