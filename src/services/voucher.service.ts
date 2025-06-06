@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { Event } from "../models/event.model";
 import { Voucher } from "../models/voucher.model";
-// import { enqueueVoucherEmail } from "../queues/email.queue";
 
 export class VoucherService {
   static async issueVoucher(eventId: string, userId: string) {
@@ -9,8 +8,9 @@ export class VoucherService {
     session.startTransaction();
     try {
       const event = await Event.findById(eventId).session(session);
-      if (!event || event.quantity <= 0) throw { code: "NOT AVAILABLE QUANTITY" };
-
+      if (!event || event.quantity <= 0) {
+        throw { code: "NOT AVAILABLE QUANTITY" };
+      }
       event.quantity -= 1;
       await event.save({ session });
 
@@ -20,7 +20,7 @@ export class VoucherService {
       });
 
       await session.commitTransaction();
-      // enqueueVoucherEmail(userId, code);
+      // sendMail(userId, code);
       return voucher[0];
     } catch (err) {
       await session.abortTransaction();
