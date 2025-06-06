@@ -6,7 +6,7 @@ export class VoucherController extends BaseController {
   async requestVoucher(req: Request, res: Response): Promise<void> {
     const { eventId } = req.body;
     try {
-      const userId = this.getUserIdOrThrow(req);
+      const userId = this.getUserId(req);
       const voucher = await VoucherService.issueVoucher(eventId, userId);
       res.status(201).json(voucher);
     } catch (err: any) {

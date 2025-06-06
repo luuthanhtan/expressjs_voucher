@@ -9,7 +9,7 @@ export abstract class BaseController {
     return res.status(statusCode).json({ message });
   }
 
-  protected getUserIdOrThrow(req: Request): string {
+  protected getUserId(req: Request): string {
     if (!req.user || !req.user.id) {
       throw new Error('Unauthorized');
     }

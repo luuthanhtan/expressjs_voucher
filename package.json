@@ -61,6 +61,6 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.1",
-    "vitest": "^3.2.0"
+    "vitest": "^3.2.2"
   }
 }
