@@ -52,16 +52,6 @@ Run the server in development mode.<br/>
 **IMPORTANT** development mode uses `swc` for performance reasons which DOES NOT check for typescript errors. Run `npm run type-check` to check for type errors. NOTE: you should use your IDE to prevent most type errors.
 
 
-### `npm test` or `npm run test:hot` (hot reloading)
-
-Run all unit-tests.
-
-
-### `npm test -- "name of test file" (i.e. users).`
-
-Run a single unit-test.
-
-
 ### `npm run lint`
 
 Check for linting errors.

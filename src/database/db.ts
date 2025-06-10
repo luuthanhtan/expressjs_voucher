@@ -1,9 +1,7 @@
+import { appConfig } from './../../config/app';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-const MONGODB_URI: string = process.env.MONGODB_URI || '';
+const MONGODB_URI: string = appConfig.mongoUri;
 
 export const connectDB = async (): Promise<void> => {
   try {

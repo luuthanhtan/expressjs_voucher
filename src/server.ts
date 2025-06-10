@@ -1,6 +1,6 @@
 import express from 'express';
 import routes from './routes';
-import { connectDB } from './db';
+import { connectDB } from './database/db';
 import { setupSwagger } from './swagger';
 
 const app = express();
