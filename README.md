@@ -1,21 +1,43 @@
-## About
+# 📦 Setup Node.js Project
 
-This project was created with [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript).
+## ✅ Step 1: Init project
+```bash
+mkdir expressjs_voucher
+cd expressjs_voucher
+npm init -y
+npm install --save-dev nodemon
+```
 
-**IMPORTANT** for demo purposes I had to disable `helmet` in production. In any real world app you should change these 3 lines of code in `src/server.ts`:
-```ts
-// eslint-disable-next-line n/no-process-env
-if (!process.env.DISABLE_HELMET) {
-  app.use(helmet());
+## ✅ Step 2: Setup DB
+```bash
+npm install express mongoose dotenv
+```
+### Add `package.json`
+```bash
+"scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
 }
 ```
-
-To just this:
-```ts
-app.use(helmet());
+MongoDB Atlas (Cloud): https://cloud.mongodb.com
+### Add `.env`
+```bash
+MONGODB_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/myDB
+PORT=3000
 ```
+## ✅ Step 3: Extensions for VS Code
+### ESLint `.eslint.config.ts`
+### Extension: GitLens — Git supercharged
+### Extension: Code Spell Checker
 
-
+## ✅ Step 4: NVM-Windows
+https://github.com/coreybutler/nvm-windows/releases
+ 
+```bash
+nvm install 22.3.0
+nvm use 22.3.0
+node -v
+```
 ## Available Scripts
 
 ### `npm run clean-install`
@@ -64,4 +86,6 @@ Check for typescript errors.
 
 - If `npm run dev` gives you issues with bcrypt on MacOS you may need to run: `npm rebuild bcrypt --build-from-source`. 
 
+
+## Swagger
 http://localhost:3000/api-docs/
