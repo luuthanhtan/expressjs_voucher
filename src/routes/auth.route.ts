@@ -33,6 +33,10 @@ const router = Router();
  *               properties:
  *                 token:
  *                   type: string
+ */
+router.post('/login', AuthController.login);
+/**
+ * @swagger
  * /auth/register:
  *   post:
  *     summary: User Register
@@ -64,7 +68,6 @@ const router = Router();
  *                 token:
  *                   type: string
  */
-router.post('/login', AuthController.login);
 router.post('/register', AuthController.register);
 
 export default router;

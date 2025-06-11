@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model";
+import { appConfig } from "../../config/app";
 
 export class AuthService {
 
@@ -15,7 +16,7 @@ export class AuthService {
     if (!user) throw new Error("User not found");
     const match = await bcrypt.compare(password, user.password);
     if (!match) throw new Error("Invalid credentials");
-    return jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
+    return jwt.sign({ id: user._id }, appConfig.jwtSecret, {
       expiresIn: "1h",
     });
   }
