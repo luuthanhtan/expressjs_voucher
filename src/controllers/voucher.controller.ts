@@ -3,7 +3,7 @@ import { VoucherService } from "../services/voucher.service";
 import { BaseController } from "./base.controller";
 
 export class VoucherController extends BaseController {
-  async requestVoucher(req: Request, res: Response): Promise<void> {
+  requestVoucher = async (req: Request, res: Response) => {
     const { eventId } = req.body;
     try {
       const userId = this.getUserId(req);

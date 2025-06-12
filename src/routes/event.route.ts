@@ -11,6 +11,8 @@ const eventController = new EventController();
  *   post:
  *     summary: Lock event for editing by current user
  *     tags: [Event]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: eventId
@@ -31,6 +33,8 @@ router.post('/:eventId/editable/me', authMiddleware, eventController.acquireEdit
  *   post:
  *     summary: Release edit lock for the current user
  *     tags: [Event]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: eventId
@@ -49,6 +53,8 @@ router.post('/:eventId/editable/release', authMiddleware, eventController.releas
  *   post:
  *     summary: Extend the edit lock for current user
  *     tags: [Event]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: eventId

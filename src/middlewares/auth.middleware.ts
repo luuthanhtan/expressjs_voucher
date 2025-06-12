@@ -24,6 +24,10 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
   const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, appConfig.jwtSecret) as JwtPayload;
+    if (!decoded || !decoded.id) {
+      res.status(401).json({ message: 'Invalid token payload' });
+      return;
+    }
     req.user = { id: decoded.id };
     next();
   } catch (err) {

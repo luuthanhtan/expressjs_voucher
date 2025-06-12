@@ -11,6 +11,8 @@ const voucherController = new VoucherController();
  *   post:
  *     summary: Request a voucher code for an event
  *     tags: [Voucher]
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
