@@ -1,3 +1,3 @@
 import './bull/email.job';
 
-console.log('🧩 All job processors loaded');
+console.log('All job processors loaded');

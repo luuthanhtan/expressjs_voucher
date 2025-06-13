@@ -7,7 +7,7 @@ const voucherController = new VoucherController();
 
 /**
  * @swagger
- * /vouchers:
+ * /vouchers/request:
  *   post:
  *     summary: Request a voucher code for an event
  *     tags: [Voucher]

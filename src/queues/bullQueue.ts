@@ -15,6 +15,7 @@ export const emailQueue = new Bull<EmailJobData>('email-queue', {
 });
 
 export const pushEmailToQueue = async (data: EmailJobData) => {
+  console.log('Pushing email to queue', data);
   await emailQueue.add(data, {
     attempts: 3,
     backoff: 5000,

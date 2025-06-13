@@ -1,6 +1,11 @@
 import { Event } from "../models/event.model";
 
 export class EventService {
+
+  static async addNew(name: string, quantity: number) {
+    const event = await Event.create({ name, quantity });
+    return { id: event._id, name: event.name, quantity: event.quantity };
+  }
   static async acquire(eventId: string, userId: string) {
     const now = new Date();
     const result = await Event.findOneAndUpdate(

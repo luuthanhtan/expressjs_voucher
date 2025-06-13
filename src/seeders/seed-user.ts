@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import { User } from '../models/user.model';
 import { appConfig } from 'config/app';
@@ -10,8 +11,16 @@ export const seedUsers = async () => {
   await User.deleteMany();
 
   await User.insertMany([
-    { name: 'Admin', email: 'admin', password: '123456' },
-    { name: 'Test', email: 'test@example.com', password: '123456' },
+    {
+      name: 'Admin',
+      email: 'admin',
+      password: await bcrypt.hash('123456', 10)
+    },
+    {
+      name: 'Test',
+      email: 'test@example.com',
+      password: await bcrypt.hash('123456', 10)
+    },
   ]);
 
   console.log('✅ Users seeded');

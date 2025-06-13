@@ -3,6 +3,13 @@ import { EventService } from '../services/event.service';
 import { BaseController } from './base.controller';
 
 export class EventController extends BaseController {
+
+  create = async (req: Request, res: Response) => {
+    const { name, quantity } = req.body;
+    const event = await EventService.addNew(name, quantity);
+    res.status(201).json(event);
+  }
+
   acquireEdit = async (req: Request, res: Response) => {
     const eventId = req.params.eventId;
     const userId = this.getUserId(req);
