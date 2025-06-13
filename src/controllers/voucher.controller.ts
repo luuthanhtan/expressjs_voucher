@@ -12,6 +12,7 @@ export class VoucherController extends BaseController {
     } catch (err: any) {
       if (err.code === "LIMIT_REACHED") {
         res.status(456).json({ message: "Limit reached" });
+        return;
       }
       res.status(500).json({ error: err.message });
     }

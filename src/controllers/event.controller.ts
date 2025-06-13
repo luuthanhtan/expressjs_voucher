@@ -16,6 +16,7 @@ export class EventController extends BaseController {
     const acquired = await EventService.acquire(eventId, userId);
     if (acquired) {
       res.sendStatus(200);
+      return;
     }
     res.sendStatus(409);
   }
@@ -33,6 +34,7 @@ export class EventController extends BaseController {
     const extended = await EventService.maintain(eventId, userId);
     if (extended) {
       res.sendStatus(200);
+      return;
     }
     res.sendStatus(409);
   }
