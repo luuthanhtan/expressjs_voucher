@@ -2,6 +2,7 @@ import express from 'express';
 import routes from './src/routes';
 import { connectDB } from './src/database/db';
 import { setupSwagger } from './src/swagger';
+import './src/jobs/index';
 
 const app = express();
 app.use(express.json());

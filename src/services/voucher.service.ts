@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { Event } from "../models/event.model";
 import { Voucher } from "../models/voucher.model";
+import { pushEmailToQueue } from "queues/bullQueue";
+import { UserService } from "./user.service";
 
 export class VoucherService {
   static async issueVoucher(eventId: string, userId: string) {
@@ -18,9 +20,13 @@ export class VoucherService {
       const voucher = await Voucher.create([{ code, eventId, userId }], {
         session,
       });
-
+      const user = await UserService.getById(userId);
       await session.commitTransaction();
-      // sendMail(userId, code);
+      pushEmailToQueue({
+        to: user.email,
+        subject: 'Your Voucher Code 🎟️',
+        html: `<p>Your voucher code is: <b>${code}</b></p>`,
+      });
       return voucher[0];
     } catch (err) {
       await session.abortTransaction();
