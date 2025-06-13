@@ -1,4 +1,4 @@
-import e, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { UserService } from '../services/user.service';
 import { BaseController } from './base.controller';
 

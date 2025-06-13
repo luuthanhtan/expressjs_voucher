@@ -1,7 +1,7 @@
 import express from 'express';
-import routes from './routes';
-import { connectDB } from './database/db';
-import { setupSwagger } from './swagger';
+import routes from './src/routes';
+import { connectDB } from './src/database/db';
+import { setupSwagger } from './src/swagger';
 
 const app = express();
 app.use(express.json());

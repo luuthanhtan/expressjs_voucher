@@ -1,5 +1,5 @@
 // scripts/show-routes.ts
-import app from '../src/server';
+import app from '../server';
 import listEndpoints from 'express-list-endpoints';
 
 const routes = listEndpoints(app);

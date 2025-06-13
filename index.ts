@@ -1,4 +1,4 @@
-import { appConfig } from './../config/app';
+import { appConfig } from './src/config/app';
 import logger from 'jet-logger';
 import server from './server';
 

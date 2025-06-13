@@ -4,12 +4,16 @@
   "scripts": {
     "build": "tsc",
     "clean-install": "rm -rf ./node_modules && rm -r package-lock.json && npm i",
-    "dev": "cross-env NODE_ENV=development ts-node ./src/index.ts",
+    "dev": "cross-env NODE_ENV=development ts-node ./index.ts",
     "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src --ext .ts",
     "lint": "eslint .",
     "start": "cross-env NODE_ENV=production node -r ./config.js ./dist/src/index.js",
     "type-check": "tsc --noEmit",
-    "routes": "ts-node scripts/routes_list.ts"
+    "routes": "ts-node scripts/routes_list.ts",
+    "seed": "ts-node src/seeders/index.ts",
+    "seed:users": "ts-node src/seeders/seed-user.ts",
+    "seed:events": "ts-node src/seeders/seed-event.ts",
+    "seed:vouchers": "ts-node src/seeders/seed-voucher.ts"
   },
   "engines": {
     "node": ">=16.0.0"

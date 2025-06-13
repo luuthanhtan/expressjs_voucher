@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { appConfig } from '../../config/app';
+import { appConfig } from '../config/app';
 
 interface JwtPayload {
   id: string;

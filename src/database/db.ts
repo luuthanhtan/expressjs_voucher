@@ -1,4 +1,4 @@
-import { appConfig } from './../../config/app';
+import { appConfig } from '../config/app';
 import mongoose from 'mongoose';
 
 const MONGODB_URI: string = appConfig.mongoUri;
