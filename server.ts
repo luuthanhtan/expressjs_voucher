@@ -1,7 +1,7 @@
 import express from 'express';
 import routes from './src/routes';
 import { connectDB } from './src/database/db';
-import { setupSwagger } from './src/swagger';
+import { setupSwagger } from './swagger';
 import './src/jobs/index';
 import cors from 'cors';
 import dotenv from 'dotenv';
