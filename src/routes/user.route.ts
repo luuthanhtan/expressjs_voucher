@@ -31,5 +31,51 @@ const userController = new UserController();
  *         description: Unauthorized
  */
 router.get('/me', authMiddleware, userController.getUser);
+/**
+ * @swagger
+ * /users/update:
+ *   put:
+ *     summary: User update me
+ *     tags: [User]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: JWT token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ */
+router.put('/update', userController.update);
+/**
+ * @swagger
+ * /users/delete:
+ *   delete:
+ *     summary: Delete me
+ *     tags:[User]
+ *     responses:
+ *       204:
+ *         description: User deleted successfully (no content)
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+router.delete("/delete", authMiddleware, userController.delete);
 
 export default router;

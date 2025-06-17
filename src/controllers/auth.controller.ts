@@ -4,8 +4,7 @@ import { BaseController } from "./base.controller";
 
 export class AuthController extends BaseController {
   static async register(req: Request, res: Response) {
-    const { email, password } = req.body;
-    const user = await AuthService.register(email, password);
+    const user = await AuthService.register(req.body);
     res.status(201).json(user);
   }
 

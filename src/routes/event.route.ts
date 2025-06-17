@@ -178,17 +178,12 @@ router.put("/:id", authMiddleware, eventController.update);
  *         schema:
  *           type: string
  *     responses:
- *       200:
- *         description: Event deleted
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
+ *       204:
+ *         description: Event deleted successfully (no content)
  *       404:
  *         description: Event not found
+ *       500:
+ *         description: Internal server error
  */
 router.delete("/:id", authMiddleware, eventController.delete);
 /**
