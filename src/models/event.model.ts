@@ -1,14 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Types, InferSchemaType, Model } from "mongoose";
 
 const eventSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    title: { type: String, required: true },
     quantity: { type: Number, required: true },
-    editingUser: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      default: null,
-    },
+    description: { type: String },
+    status: { type: String },
+    start: { type: Date, required: true },
+    end: { type: Date, required: true },
+    createdBy: { type: Types.ObjectId, ref: "User", required: true },
+    editingUser: { type: Types.ObjectId, ref: "User", default: null },
     editingUserExpiresAt: { type: Date, default: null },
   },
   { timestamps: true }

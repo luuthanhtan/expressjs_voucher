@@ -13,7 +13,8 @@
     "seed": "ts-node src/seeders/index.ts",
     "seed:users": "ts-node src/seeders/seed-user.ts",
     "seed:events": "ts-node src/seeders/seed-event.ts",
-    "seed:vouchers": "ts-node src/seeders/seed-voucher.ts"
+    "seed:vouchers": "ts-node src/seeders/seed-voucher.ts",
+    "watch": "cross-env NODE_ENV=development nodemon"
   },
   "engines": {
     "node": ">=16.0.0"
