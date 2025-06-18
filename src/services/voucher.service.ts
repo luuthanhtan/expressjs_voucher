@@ -1,30 +1,43 @@
-import mongoose from "mongoose";
 import { Event } from "../models/event.model";
-import { Voucher } from "../models/voucher.model";
+import { Voucher, voucherDocument } from "../models/voucher.model";
 
 export class VoucherService {
-  static async issueVoucher(eventId: string, userId: string) {
-    const session = await mongoose.startSession();
-    session.startTransaction();
+  static async issueVoucher(data: Record<string, any>, quantity: number): Promise<Array<voucherDocument>> {
     try {
-      const event = await Event.findById(eventId).session(session);
-      if (!event || event.quantity <= 0) {
-        throw { code: "NOT AVAILABLE QUANTITY" };
-      }
-      event.quantity -= 1;
-      await event.save({ session });
+      var vouchers: Array<voucherDocument> = [];
+      for (let i = 0; i < quantity; i++) {
+        const event = await Event.findById(data.eventId);
+        if (!event || event.quantity <= 0) {
+          break;
+        }
+        event.quantity -= 1;
+        await event.save();
 
-      const code = "VC" + Date.now();
-      const voucher = await Voucher.create([{ code, eventId, userId }], {
-        session,
-      });
-      await session.commitTransaction();
-      return voucher[0];
+        const code = "VC" + Date.now();
+        let createVoucher = {
+            code: code,
+            title: data.title,
+            description: data.description,
+            status: data.status || true,
+            startDate: data.startDate,
+            expireDate: data.expireDate,
+            value: data.value || 0,
+            percentage: data.percentage || 0,
+            isPercent: data.isPercent || false,
+            eventId: data.eventId,
+            userId: data.userId,
+        }
+        const voucher = await this.create(createVoucher)
+        vouchers.push(voucher);
+      }
+      return vouchers;
     } catch (err) {
-      await session.abortTransaction();
       throw err;
-    } finally {
-      session.endSession();
     }
+  }
+
+  static async create(data: object): Promise<voucherDocument> {
+    const voucher = await Voucher.create(data);
+    return voucher;
   }
 }

@@ -1,8 +1,30 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, model, Document } from "mongoose";
 
-const voucherSchema = new mongoose.Schema(
+export interface voucherDocument extends Document {
+  code: String;
+  title: String;
+  description?: String;
+  status: Boolean;
+  startDate: Date;
+  expireDate: Date;
+  value: Number;
+  percentage: Number;
+  isPercent: Boolean;
+  eventId: String;
+  userId: String;
+}
+
+const voucherSchema = new Schema<voucherDocument>(
   {
     code: { type: String, required: true, unique: true },
+    title: { type: String, required: true },
+    description: { type: String},
+    status: { type: Boolean },
+    startDate: { type: Date },
+    expireDate: { type: Date, required: true },
+    value: { type: Number, required: true },
+    percentage: { type: Number, required: true },
+    isPercent: { type: Boolean, required: true },
     eventId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Event",
@@ -17,4 +39,4 @@ const voucherSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Voucher = mongoose.model("Voucher", voucherSchema);
+export const Voucher = model<voucherDocument>("Voucher", voucherSchema);

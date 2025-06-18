@@ -141,11 +141,11 @@ router.get("/:id", authMiddleware, eventController.read);
  *               start:
  *                 type: string
  *                 format: date
- *                 example: "17-06-2025"
+ *                 example: "YYYY-MM-DD"
  *               end:
  *                 type: string
  *                 format: date
- *                 example: "17-06-2025"
+ *                 example: "YYYY-MM-DD"
  *               description:
  *                 type: string
  *               status:

@@ -1,9 +1,9 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface UserDocument extends Document {
-  name?: string;
-  email: string;
-  password: string;
+  name?: String;
+  email: String;
+  password: String;
   created: Date;
   createdAt: Date;
   updatedAt: Date;

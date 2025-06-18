@@ -24,7 +24,7 @@ export class AuthService {
   static async login(email: string, password: string) {
     const user = await User.findOne({ email });
     if (!user) throw new Error("User not found");
-    const match = await bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, String(user.password));
     if (!match) throw new Error("Invalid credentials");
     return jwt.sign({ id: user._id }, appConfig.jwtSecret, {
       expiresIn: "8h",

@@ -9,7 +9,7 @@ const userController = new UserController();
  * @swagger
  * /users/me:
  *   get:
- *     summary: Get current authenticated user
+ *     summary: Get current user
  *     tags: [User]
  *     security:
  *       - BearerAuth: []
@@ -35,7 +35,7 @@ router.get('/me', authMiddleware, userController.getUser);
  * @swagger
  * /users/update:
  *   put:
- *     summary: User update me
+ *     summary: Update user
  *     tags: [User]
  *     requestBody:
  *       required: true
@@ -66,8 +66,8 @@ router.put('/update', userController.update);
  * @swagger
  * /users/delete:
  *   delete:
- *     summary: Delete me
- *     tags:[User]
+ *     summary: Delete user
+ *     tags: [User]
  *     responses:
  *       204:
  *         description: User deleted successfully (no content)

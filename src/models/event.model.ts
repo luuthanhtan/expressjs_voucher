@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types, InferSchemaType, Model } from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 const eventSchema = new mongoose.Schema(
   {

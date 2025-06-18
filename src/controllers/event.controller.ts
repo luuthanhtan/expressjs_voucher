@@ -10,6 +10,8 @@ export class EventController extends BaseController {
     this.eventService = new EventService();
   }
   create = async (req: Request, res: Response): Promise<void> => {
+    const userId = this.getUserId(req);
+    req.body.createdBy = userId;
     const event = await EventService.create(req.body);
     res.status(201).json(event);
   }
