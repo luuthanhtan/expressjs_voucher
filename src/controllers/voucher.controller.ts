@@ -68,5 +68,32 @@ export class VoucherController extends BaseController {
       }
       res.status(500).json({ error: err.message });
     }
-  }
+  };
+
+  read = async (req: Request, res: Response): Promise<void> => {
+    const voucherId = req.params.voucherId;
+    if (voucherId) {
+      const voucher = await VoucherService.getById(voucherId);
+      res.json(voucher);
+      return;
+    }
+    const vouchers = await VoucherService.getList();
+    res.json(vouchers);
+  };
+
+  update = async (req: Request, res: Response): Promise<void> => {
+    const voucherId = req.params.voucherId;
+    const voucher = await VoucherService.update(voucherId, req.body);
+    res.json(voucher);
+  };
+
+  delete = async (req: Request, res: Response): Promise<void> => {
+    const voucherId = req.params.eventId;
+    const deleted = await VoucherService.delete(voucherId);
+    if (deleted) {
+      res.sendStatus(204);
+      return;
+    }
+    res.sendStatus(409);
+  };
 }

@@ -38,7 +38,7 @@ export class EventController extends BaseController {
     const eventId = req.params.eventId;
     const deleted = await EventService.delete(eventId);
     if (deleted) {
-      res.sendStatus(200);
+      res.sendStatus(204);
       return;
     }
     res.sendStatus(409);
