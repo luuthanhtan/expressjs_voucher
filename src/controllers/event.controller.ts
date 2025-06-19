@@ -29,14 +29,16 @@ export class EventController extends BaseController {
   }
 
   update = async (req: Request, res: Response): Promise<void> => {
+    const userId = this.getUserId(req);
     const eventId = req.params.eventId;
-    const event = await EventService.update(eventId, req.body);
+    const event = await EventService.update(eventId, userId, req.body);
     res.json(event);
   }
 
   delete = async (req: Request, res: Response): Promise<void> => {
+    const userId = this.getUserId(req);
     const eventId = req.params.eventId;
-    const deleted = await EventService.delete(eventId);
+    const deleted = await EventService.delete(eventId, userId);
     if (deleted) {
       res.sendStatus(204);
       return;

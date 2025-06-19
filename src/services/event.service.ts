@@ -23,9 +23,9 @@ export class EventService {
     return event;
   }
 
-  static async update(eventId: string, dataEvent: object): Promise<object> {
+  static async update(eventId: string, userId: string, dataEvent: object): Promise<object> {
     const updatedEvent = await Event.findOneAndUpdate(
-      { _id: eventId },
+      { _id: eventId, editingUser: userId },
       dataEvent,
       { new: true }
     ).lean();
@@ -33,8 +33,8 @@ export class EventService {
     return updatedEvent;
   }
 
-  static async delete(eventId: String): Promise<boolean> {
-    const result = await Event.findByIdAndDelete(eventId);
+  static async delete(eventId: string, userId: string): Promise<boolean> {
+    const result = await Event.findOneAndDelete({ _id: eventId, editingUser: userId });
     return !!result
   }
 
