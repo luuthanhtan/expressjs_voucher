@@ -23,7 +23,6 @@ MongoDB Atlas (Cloud): https://cloud.mongodb.com
 ### Add `.env`
 ```bash
 MONGODB_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/myDB
-PORT=3000
 ```
 ## ✅ Step 3: Extensions for VS Code
 ### ESLint `.eslint.config.ts`
@@ -38,6 +37,16 @@ nvm install 22.3.0
 nvm use 22.3.0
 node -v
 ```
+
+
+## ✅ Step 4: Migration
+ 
+```bash
+npx migrate-mongo up
+npx migrate-mongo status
+```
+
+
 ## Available Scripts
 
 ### `npm run clean-install`

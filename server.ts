@@ -22,6 +22,6 @@ app.use('/', routes);
 
 connectDB();
 setupSwagger(app);
-startAgenda().catch(console.error);
+if (process.env.AGENDA_ENABLE == 'true') startAgenda().catch(console.error);
 
 export default app;
