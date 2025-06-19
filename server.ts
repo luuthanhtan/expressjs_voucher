@@ -5,6 +5,7 @@ import { setupSwagger } from './swagger';
 import './src/jobs/index';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { startAgenda } from 'queues/agendaQueue';
 
 dotenv.config();
 
@@ -21,5 +22,6 @@ app.use('/', routes);
 
 connectDB();
 setupSwagger(app);
+startAgenda().catch(console.error);
 
 export default app;

@@ -7,14 +7,13 @@ import { appConfig } from "../config/app";
 export class AuthService {
   private static instance: AuthService;
 
-  private constructor() {}
-
   static getInstance(): AuthService {
     if (!AuthService.instance) {
       AuthService.instance = new AuthService();
     }
     return AuthService.instance;
   }
+
   static async register(data: { name?: string; email?: string, password?: string }) {
     const user = await UserService.create(data);
     if (!user) throw new Error("User not created");
