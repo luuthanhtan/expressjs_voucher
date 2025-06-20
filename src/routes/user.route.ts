@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/user.controller';
 import { authMiddleware } from '../middlewares/auth.middleware';
+import { validateBody } from '../middlewares/validate.middleware';
+import { userSchema } from 'validations/user.validation';
 
 const router = Router();
 const userController = new UserController();
@@ -61,7 +63,7 @@ router.get('/me', authMiddleware, userController.getUser);
  *                 token:
  *                   type: string
  */
-router.put('/update', userController.update);
+router.put('/update', authMiddleware, validateBody(userSchema), userController.update);
 /**
  * @swagger
  * /users/delete:
