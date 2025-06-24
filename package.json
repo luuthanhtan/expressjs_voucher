@@ -20,9 +20,12 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "@bull-board/api": "^6.10.1",
+    "@bull-board/express": "^6.10.1",
+    "@bull-board/ui": "^6.10.1",
     "agenda": "^5.0.0",
     "bcrypt": "^6.0.0",
-    "bullmq": "^5.54.3",
+    "bullmq": "^5.56.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",

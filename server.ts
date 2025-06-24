@@ -6,6 +6,7 @@ import './src/jobs/index';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { startAgenda } from 'queues/agendaQueue';
+import queueDashboard from './queueUI';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(cors({
 app.use(cors());
 app.use(express.json());
 app.use('/', routes);
+app.use('/admin/queues', queueDashboard.getRouter());
 
 connectDB();
 setupSwagger(app);
