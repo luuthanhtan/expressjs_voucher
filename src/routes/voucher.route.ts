@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { VoucherController } from "../controllers/voucher.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
+import { validateBody } from "middlewares/validate.middleware";
+import { voucherCreateSchema, voucherUpdateSchema } from "validations/voucher.validation";
 
 const router = Router();
 const voucherController = new VoucherController();
@@ -21,6 +23,7 @@ const voucherController = new VoucherController();
  *             type: object
  *             required:
  *               - title
+ *               - status
  *               - startDate
  *               - expireDate
  *               - eventId
@@ -41,10 +44,8 @@ const voucherController = new VoucherController();
  *                 example: "YYYY-MM-DD"
  *               value:
  *                 type: number
- *               percentage:
- *                 type: number
  *               isPercent:
- *                 type: number
+ *                 type: boolean
  *               eventId:
  *                 type: string
  *               quantity:
@@ -55,7 +56,7 @@ const voucherController = new VoucherController();
  *       456:
  *         description: No more vouchers left
  */
-router.post("/request", authMiddleware, voucherController.requestVoucher);
+router.post("/request", authMiddleware, validateBody(voucherCreateSchema), voucherController.requestVoucher);
 /**
  * @swagger
  * /vouchers:
@@ -127,11 +128,6 @@ router.get("/:id", authMiddleware, voucherController.read);
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - title
- *               - startDate
- *               - expireDate
- *               - eventId
  *             properties:
  *               title:
  *                 type: string
@@ -149,14 +145,8 @@ router.get("/:id", authMiddleware, voucherController.read);
  *                 example: "YYYY-MM-DD"
  *               value:
  *                 type: number
- *               percentage:
- *                 type: number
  *               isPercent:
- *                 type: number
- *               eventId:
- *                 type: string
- *               quantity:
- *                 type: number
+ *                 type: boolean
  *     responses:
  *       200:
  *         description: JWT token
@@ -168,7 +158,7 @@ router.get("/:id", authMiddleware, voucherController.read);
  *                 token:
  *                   type: string
  */
-router.put("/:id", authMiddleware, voucherController.update);
+router.put("/:id", authMiddleware, validateBody(voucherUpdateSchema), voucherController.update);
 /**
  * @swagger
  * /vouchers/{id}:

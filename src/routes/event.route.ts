@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { EventController } from "../controllers/event.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
+import { validateBody } from "middlewares/validate.middleware";
+import { eventCreateSchema, eventUpdateSchema } from "validations/event.validation";
 
 const router = Router();
 const eventController = new EventController();
@@ -34,11 +36,11 @@ const eventController = new EventController();
  *               start:
  *                 type: string
  *                 format: date
- *                 example: "17-06-2025"
+ *                 example: "YYYY-MM-DD"
  *               end:
  *                 type: string
  *                 format: date
- *                 example: "17-06-2025"
+ *                 example: "YYYY-MM-DD"
  *               description:
  *                 type: string
  *               status:
@@ -54,7 +56,7 @@ const eventController = new EventController();
  *                 token:
  *                   type: string
  */
-router.post("/", authMiddleware, eventController.create);
+router.post("/", authMiddleware, validateBody(eventCreateSchema), eventController.create);
 /**
  * @swagger
  * /events:
@@ -126,18 +128,9 @@ router.get("/:id", authMiddleware, eventController.read);
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - title
- *               - quantity
- *               - start
- *               - end
- *               - description
- *               - status
  *             properties:
  *               title:
  *                 type: string
- *               quantity:
- *                 type: number
  *               start:
  *                 type: string
  *                 format: date
@@ -161,7 +154,7 @@ router.get("/:id", authMiddleware, eventController.read);
  *                 token:
  *                   type: string
  */
-router.put("/:id", authMiddleware, eventController.update);
+router.put("/:id", authMiddleware, validateBody(eventUpdateSchema), eventController.update);
 /**
  * @swagger
  * /events/{id}:

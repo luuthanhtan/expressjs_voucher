@@ -8,7 +8,6 @@ export interface voucherDocument extends Document {
   startDate: Date;
   expireDate: Date;
   value: Number;
-  percentage: Number;
   isPercent: Boolean;
   eventId: String;
   userId: String;
@@ -23,7 +22,6 @@ const voucherSchema = new Schema<voucherDocument>(
     startDate: { type: Date },
     expireDate: { type: Date, required: true },
     value: { type: Number, required: true },
-    percentage: { type: Number, required: true },
     isPercent: { type: Boolean, required: true },
     eventId: {
       type: mongoose.Schema.Types.ObjectId,

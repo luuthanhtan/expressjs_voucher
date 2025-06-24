@@ -11,6 +11,6 @@ export const emailQueue = new Queue('emailQueue', {
 });
 
 export const pushEmailToQueue = async (data: EmailJobData) => {
-  console.log('Pushing email to queue', data);
+  console.log('Pushing email to queue: ', data.to);
   await emailQueue.add('sendMail', data);
 };

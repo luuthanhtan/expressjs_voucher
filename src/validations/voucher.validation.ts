@@ -9,20 +9,24 @@ const end = Joi.string()
     const s = h.state.ancestors[0].start;
     return new Date(v) < new Date(s) ? h.error("any.invalid") : v;
   });
-
-export const eventCreateSchema = Joi.object({
+export const voucherCreateSchema = Joi.object({
   title: Joi.string().required(),
-  quantity: Joi.number().integer().min(1).required(),
   description: Joi.string().optional(),
   status: Joi.boolean().required(),
-  start: start.required(),
-  end: end.required(),
+  startDate: start.required(),
+  expireDate: end.required(),
+  value: Joi.number().required(),
+  isPercent: Joi.boolean().required(),
+  eventId: Joi.string().length(24).hex().required(),
+  quantity: Joi.number().integer().min(1).required(),
 });
 
-export const eventUpdateSchema = Joi.object({
+export const voucherUpdateSchema = Joi.object({
   title: Joi.string().optional(),
   description: Joi.string().optional(),
   status: Joi.boolean().optional(),
-  start: start.optional(),
-  end: end.optional(),
+  startDate: start.optional(),
+  expireDate: end.optional(),
+  value: Joi.number().optional(),
+  isPercent: Joi.boolean().optional(),
 });

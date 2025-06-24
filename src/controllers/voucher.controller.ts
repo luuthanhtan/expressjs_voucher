@@ -22,7 +22,6 @@ export class VoucherController extends BaseController {
         startDate: req.body.startDate,
         expireDate: req.body.expireDate,
         value: req.body.value || 0,
-        percentage: req.body.percentage || 0,
         isPercent: req.body.isPercent || false,
         eventId: req.body.eventId,
         userId: userId,
@@ -78,6 +77,8 @@ export class VoucherController extends BaseController {
 
   update = async (req: Request, res: Response): Promise<void> => {
     const voucherId = req.params.voucherId;
+    delete req.body.eventId;
+    delete req.body.quantity;
     const voucher = await VoucherService.update(voucherId, req.body);
     if ("error" in voucher) {
       res.status(400).json({ message: voucher.error });

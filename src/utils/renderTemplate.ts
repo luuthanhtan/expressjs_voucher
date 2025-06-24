@@ -9,7 +9,7 @@ export const renderTemplate = (
     __dirname,
     "..",
     "templates",
-    "voucher-detail.html"
+    "emailTemplate.html"
   );
   let html = fs.readFileSync(templatePath, "utf-8");
   const data: Record<string, any> = {
@@ -19,7 +19,7 @@ export const renderTemplate = (
     status: voucher.status ? "Active" : "Inactive",
     startDate: new Date(voucher.startDate).toLocaleString(),
     expireDate: new Date(voucher.expireDate).toLocaleString(),
-    value: voucher.isPercent ? `${voucher.percentage}%` : `$${voucher.value}`,
+    value: voucher.value + (voucher.isPercent ? '%' : '$'),
   };
   for (const key in data) {
     html = html.replace(new RegExp(`\\$\\{${key}\\}`, "g"), data[key]);

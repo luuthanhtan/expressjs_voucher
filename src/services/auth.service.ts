@@ -26,7 +26,7 @@ export class AuthService {
 
   static async login(email: string, password: string) {
     const user = await User.findOne({ email });
-    if (!user) return { error: "User not created" };
+    if (!user) return { error: "Wrong email or password" };
     const match = await bcrypt.compare(password, String(user.password));
     if (!match) return { error: "Invalid credentials" };
     return jwt.sign({ id: user._id }, appConfig.jwtSecret, {

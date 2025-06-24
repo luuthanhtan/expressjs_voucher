@@ -75,11 +75,15 @@ export class EventService {
     return !!result;
   }
 
-  static async release(eventId: string, userId: string): Promise<void> {
+  static async release(eventId: string, userId: string): Promise<{ code: number; message: string }> {
+    const result = await this.acquire(eventId, userId);
+    if (!result)
+      return { code: 409, message: "Event is not editable by the current user" };
     await Event.updateOne(
       { _id: eventId, editingUser: userId },
       { editingUser: null, editingUserExpiresAt: null }
     );
+    return { code: 200, message: "Lock released" };
   }
 
   static async maintain(eventId: string, userId: string): Promise<boolean> {
@@ -91,7 +95,7 @@ export class EventService {
         editingUserExpiresAt: { $gt: now },
       },
       {
-        editingUserExpiresAt:  new Date(now.getTime() + EVENT_CONST.EXPIRE_TIME),
+        editingUserExpiresAt: new Date(now.getTime() + EVENT_CONST.EXPIRE_TIME),
       },
       { new: true }
     );

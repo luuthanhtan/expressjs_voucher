@@ -48,8 +48,6 @@ router.get('/me', authMiddleware, userController.getUser);
  *             properties:
  *               email:
  *                 type: string
- *               password:
- *                 type: string
  *               name:
  *                 type: string
  *     responses:

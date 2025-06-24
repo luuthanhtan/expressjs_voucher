@@ -16,7 +16,7 @@ export class VoucherService {
       }
       const availableQuantity = event.quantity - event.usedQuantity;
       if (availableQuantity < quantity) {
-        return "Not enough vouchers available";
+        return "Event quantity not enough";
       }
       const now = Date.now();
       const vouchers = Array.from({ length: quantity }, (_, i) => ({
@@ -27,7 +27,6 @@ export class VoucherService {
         startDate: data.startDate,
         expireDate: data.expireDate,
         value: data.value ?? 0,
-        percentage: data.percentage ?? 0,
         isPercent: data.isPercent ?? false,
         eventId: data.eventId,
         userId: data.userId,

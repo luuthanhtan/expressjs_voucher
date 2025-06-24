@@ -1,6 +1,6 @@
-import e, { Request, Response } from 'express';
-import { EventService } from '../services/event.service';
-import { BaseController } from './base.controller';
+import e, { Request, Response } from "express";
+import { EventService } from "../services/event.service";
+import { BaseController } from "./base.controller";
 
 export class EventController extends BaseController {
   private eventService: EventService;
@@ -18,7 +18,7 @@ export class EventController extends BaseController {
       res.status(400).json({ message: event.error });
     }
     res.status(201).json(event);
-  }
+  };
 
   read = async (req: Request, res: Response): Promise<void> => {
     console.log(req.params);
@@ -36,7 +36,7 @@ export class EventController extends BaseController {
       res.status(400).json({ message: events.error });
     }
     res.json(events);
-  }
+  };
 
   update = async (req: Request, res: Response): Promise<void> => {
     const userId = super.getUserId(req);
@@ -48,7 +48,7 @@ export class EventController extends BaseController {
       res.status(400).json({ message: event.error });
     }
     res.json(event);
-  }
+  };
 
   delete = async (req: Request, res: Response): Promise<void> => {
     const userId = super.getUserId(req);
@@ -59,7 +59,7 @@ export class EventController extends BaseController {
       return;
     }
     res.sendStatus(409);
-  }
+  };
 
   acquireEdit = async (req: Request, res: Response): Promise<void> => {
     const eventId = req.params.eventId;
@@ -70,14 +70,14 @@ export class EventController extends BaseController {
       return;
     }
     res.sendStatus(409);
-  }
+  };
 
   releaseEdit = async (req: Request, res: Response): Promise<void> => {
     const eventId = req.params.eventId;
     const userId = super.getUserId(req);
-    await EventService.release(eventId, userId);
-    res.sendStatus(200);
-  }
+    const release = await EventService.release(eventId, userId);
+    res.status(release.code).json({ message: release.message });
+  };
 
   maintainEdit = async (req: Request, res: Response): Promise<void> => {
     const eventId = req.params.eventId;
@@ -88,5 +88,5 @@ export class EventController extends BaseController {
       return;
     }
     res.sendStatus(409);
-  }
+  };
 }
