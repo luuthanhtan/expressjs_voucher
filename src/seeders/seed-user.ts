@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import { User } from '../models/user.model';
 import { appConfig } from 'config/app';
-
+import logger from 'jet-logger';
 
 const MONGODB_URI = appConfig.mongoUri;
 
@@ -23,11 +23,11 @@ export const seedUsers = async () => {
     },
   ]);
 
-  console.log('✅ Users seeded');
+  logger.info('✅ Users seeded');
   await mongoose.disconnect();
 };
 
 seedUsers().catch((err) => {
-  console.error('❌ Seeder error:', err);
+  logger.err('❌ Seeder error:', err);
   process.exit(1);
 });

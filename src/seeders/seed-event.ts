@@ -1,7 +1,7 @@
 import { Event as EventModel } from './../models/event.model';
 import mongoose from 'mongoose';
 import { appConfig } from 'config/app'; 
-
+import logger from 'jet-logger';
 
 const MONGODB_URI = appConfig.mongoUri;
 
@@ -20,11 +20,11 @@ export const seedEvents = async () => {
     },
   ]);
 
-  console.log('Events seeded');
+  logger.info('Events seeded');
   await mongoose.disconnect();
 };
 
 seedEvents().catch((err) => {
-  console.error('Seeder events error:', err);
+  logger.err('Seeder events error:', err);
   process.exit(1);
 });

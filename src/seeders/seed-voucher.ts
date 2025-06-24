@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { appConfig } from 'config/app';
 import { Voucher } from '../models/voucher.model';
 import { User } from 'models/user.model';
-
+import logger from 'jet-logger';
 
 const MONGODB_URI = appConfig.mongoUri;
 
@@ -13,11 +13,11 @@ export const seedVouchers = async () => {
   const event = await EventModel.findOne();
   const user = await User.findOne();
   if (!event) {
-    console.log('No event found to attach vouchers');
+    logger.err('No event found to attach vouchers');
     return;
   }
   if (!user) {
-    console.log('No user found to attach vouchers');
+    logger.err('No user found to attach vouchers');
     return;
   }
 
@@ -37,7 +37,7 @@ export const seedVouchers = async () => {
     },
   ]);
 
-  console.log('Vouchers seeded');
+  logger.info('Vouchers seeded');
   await mongoose.disconnect();
 };
 

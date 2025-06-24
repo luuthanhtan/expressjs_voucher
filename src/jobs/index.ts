@@ -1,3 +1,4 @@
+import logger from 'jet-logger';
 import './bull/email.job';
 
-console.log('All job processors loaded');
+logger.info('All job processors loaded');

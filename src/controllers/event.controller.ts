@@ -21,7 +21,6 @@ export class EventController extends BaseController {
   };
 
   read = async (req: Request, res: Response): Promise<void> => {
-    console.log(req.params);
     const eventId = req.params.eventId;
     if (eventId) {
       const event = await EventService.getById(eventId);

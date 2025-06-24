@@ -3,6 +3,7 @@ import { appConfig } from "config/app";
 import dotenv from "dotenv";
 import { checkMongoJob } from "jobs/agenda/healthCheckConnectDatabase.job";
 import { AGENDA_JOBS } from "utils/const";
+import logger from 'jet-logger';
 
 dotenv.config();
 
@@ -29,5 +30,5 @@ export const agenda = new Agenda({
 
 export const startAgenda = async (time: string = AGENDA_JOBS.TIME_CHECK_MONGO_CONNECTION) => {
   checkMongoJob(agenda);
-  console.log("Agenda started and job scheduled");
+  logger.info("Agenda started and job scheduled");
 };
