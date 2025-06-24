@@ -1,0 +1,8 @@
+<h2>Your Voucher Details 🎟️</h2>
+<p><b>Code:</b> ${voucher.code}</p>
+<p><b>Title:</b> ${voucher.title}</p>
+<p><b>Description:</b> ${voucher.description || "-"}</p>
+<p><b>Status:</b> ${voucher.status ? "Active" : "Inactive"}</p>
+<p><b>Start Date:</b> ${new Date(voucher.startDate).toLocaleString()}</p>
+<p><b>Expire Date:</b> ${new Date(voucher.expireDate).toLocaleString()}</p>
+<p><b>Value:</b> ${voucher.isPercent ? voucher.percentage + "%" : "$" + voucher.value}</p>

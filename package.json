@@ -13,14 +13,16 @@
     "seed": "ts-node src/seeders/index.ts",
     "seed:users": "ts-node src/seeders/seed-user.ts",
     "seed:events": "ts-node src/seeders/seed-event.ts",
-    "seed:vouchers": "ts-node src/seeders/seed-voucher.ts"
+    "seed:vouchers": "ts-node src/seeders/seed-voucher.ts",
+    "watch": "cross-env NODE_ENV=development nodemon"
   },
   "engines": {
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "agenda": "^5.0.0",
     "bcrypt": "^6.0.0",
-    "bull": "^4.16.5",
+    "bullmq": "^5.54.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
@@ -33,6 +35,7 @@
     "jet-logger": "^2.0.1",
     "jet-paths": "^1.1.0",
     "jet-validators": "^1.4.2",
+    "joi": "^17.13.3",
     "jsonfile": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
     "module-alias": "^2.2.3",

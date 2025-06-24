@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import { EventController } from '../controllers/event.controller';
-import { authMiddleware } from '../middlewares/auth.middleware';
+import { Router } from "express";
+import { EventController } from "../controllers/event.controller";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 const eventController = new EventController();
@@ -13,20 +13,36 @@ const eventController = new EventController();
  *     tags: [Event]
  *     security:
  *       - BearerAuth: []
-  *     requestBody:
+ *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - title
  *               - quantity
+ *               - start
+ *               - end
+ *               - description
+ *               - status
  *             properties:
- *               name:
+ *               title:
  *                 type: string
  *               quantity:
  *                 type: number
+ *               start:
+ *                 type: string
+ *                 format: date
+ *                 example: "17-06-2025"
+ *               end:
+ *                 type: string
+ *                 format: date
+ *                 example: "17-06-2025"
+ *               description:
+ *                 type: string
+ *               status:
+ *                 type: boolean
  *     responses:
  *       200:
  *         description: JWT token
@@ -38,7 +54,138 @@ const eventController = new EventController();
  *                 token:
  *                   type: string
  */
-router.post('/', authMiddleware, eventController.create);
+router.post("/", authMiddleware, eventController.create);
+/**
+ * @swagger
+ * /events:
+ *   get:
+ *     summary: Get list events
+ *     tags:
+ *       - Event
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Event get successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *       404:
+ *         description: Event not found
+ */
+/**
+ * @swagger
+ * /events/{id}:
+ *   get:
+ *     summary: Get event
+ *     tags:
+ *       - Event
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         required: true
+ *         in: path
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Event get successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *       404:
+ *         description: Event not found
+ */
+router.get("/:id", authMiddleware, eventController.read);
+/**
+ * @swagger
+ * /events/{id}:
+ *   put:
+ *     summary: Update event
+ *     tags: [Event]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - quantity
+ *               - start
+ *               - end
+ *               - description
+ *               - status
+ *             properties:
+ *               title:
+ *                 type: string
+ *               quantity:
+ *                 type: number
+ *               start:
+ *                 type: string
+ *                 format: date
+ *                 example: "YYYY-MM-DD"
+ *               end:
+ *                 type: string
+ *                 format: date
+ *                 example: "YYYY-MM-DD"
+ *               description:
+ *                 type: string
+ *               status:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: JWT token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ */
+router.put("/:id", authMiddleware, eventController.update);
+/**
+ * @swagger
+ * /events/{id}:
+ *   delete:
+ *     summary: Delete event
+ *     tags:
+ *       - Event
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: Event deleted successfully (no content)
+ *       404:
+ *         description: Event not found
+ *       500:
+ *         description: Internal server error
+ */
+router.delete("/:id", authMiddleware, eventController.delete);
 /**
  * @swagger
  * /events/{eventId}/editable/me:
@@ -60,7 +207,11 @@ router.post('/', authMiddleware, eventController.create);
  *       409:
  *         description: Someone else is editing this event
  */
-router.post('/:eventId/editable/me', authMiddleware, eventController.acquireEdit);
+router.post(
+  "/:eventId/editable/me",
+  authMiddleware,
+  eventController.acquireEdit
+);
 /**
  * @swagger
  * /events/{eventId}/editable/release:
@@ -80,7 +231,11 @@ router.post('/:eventId/editable/me', authMiddleware, eventController.acquireEdit
  *       200:
  *         description: Lock released
  */
-router.post('/:eventId/editable/release', authMiddleware, eventController.releaseEdit);
+router.post(
+  "/:eventId/editable/release",
+  authMiddleware,
+  eventController.releaseEdit
+);
 /**
  * @swagger
  * /events/{eventId}/editable/maintain:
@@ -100,6 +255,10 @@ router.post('/:eventId/editable/release', authMiddleware, eventController.releas
  *       200:
  *         description: Lock extended
  */
-router.post('/:eventId/editable/maintain', authMiddleware, eventController.maintainEdit);
+router.post(
+  "/:eventId/editable/maintain",
+  authMiddleware,
+  eventController.maintainEdit
+);
 
 export default router;

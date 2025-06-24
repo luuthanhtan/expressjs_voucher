@@ -29,7 +29,7 @@
     "scripts",
     "eslint.config.ts",
     "vitest.config.ts"
-, "server.ts"  ],
+, "server.ts", "swagger.ts"  ],
   "exclude": [
     "src/public/*"
   ]
