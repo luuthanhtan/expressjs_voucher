@@ -29,8 +29,5 @@ export const agenda = new Agenda({
 
 export const startAgenda = async (time: string = AGENDA_JOBS.TIME_CHECK_MONGO_CONNECTION) => {
   checkMongoJob(agenda);
-  await agenda.start();
-  await agenda.every(time, AGENDA_JOBS.CHECK_MONGO_CONNECTION);
-
   console.log("Agenda started and job scheduled");
 };
