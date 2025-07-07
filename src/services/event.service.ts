@@ -1,4 +1,3 @@
-import { error } from "console";
 import { Event } from "./../models/event.model";
 import { EVENT_CONST } from "utils/const";
 

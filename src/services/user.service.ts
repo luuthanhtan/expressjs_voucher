@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import Joi from "joi";
 import { User, UserDocument } from "../models/user.model";
 
 export class UserService {
