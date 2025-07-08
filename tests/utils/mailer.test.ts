@@ -1,8 +1,12 @@
 import { sendMail } from "../../src/utils/mailer";
 import nodemailer from "nodemailer";
 
-// Lấy lại mock để kiểm tra
-const sendMailMock = (nodemailer as any).sendMailMock;
+// Mock nodemailer
+jest.mock("nodemailer");
+const sendMailMock = jest.fn();
+(nodemailer.createTransport as jest.Mock).mockReturnValue({
+  sendMail: sendMailMock,
+});
 
 describe("sendMail", () => {
   beforeEach(() => {
@@ -18,7 +22,7 @@ describe("sendMail", () => {
 
     await sendMail(to, subject, html);
 
-    expect(nodemailer.createTransport).toHaveBeenCalled();
+    expect(nodemailer.createTransport).toHaveBeenCalled(); // optional
     expect(sendMailMock).toHaveBeenCalledWith({
       from: `"Voucher App" <${process.env.EMAIL_USER}>`,
       to,
