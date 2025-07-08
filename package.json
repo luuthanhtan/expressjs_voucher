@@ -74,6 +74,7 @@
     "express-list-endpoints": "^7.1.1",
     "find": "^0.3.0",
     "fs-extra": "^11.3.0",
+    "ioredis-mock": "^8.9.0",
     "jest": "^30.0.4",
     "jiti": "^2.4.2",
     "migrate-mongo": "^12.1.3",
