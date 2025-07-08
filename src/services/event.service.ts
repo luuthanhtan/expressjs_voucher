@@ -1,5 +1,5 @@
 import { Event } from "./../models/event.model";
-import { EVENT_CONST } from "utils/const";
+import { EVENT_CONST } from "../utils/const";
 
 export class EventService {
   static async create(dataEvent: Record<string, any>): Promise<object> {

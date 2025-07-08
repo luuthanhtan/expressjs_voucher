@@ -12,10 +12,14 @@ export class VoucherService {
     try {
       const event = await Event.findById(data.eventId).session(session);
       if (!event) {
+        await session.abortTransaction();
+        session.endSession();
         return "Event not found";
       }
       const availableQuantity = event.quantity - event.usedQuantity;
       if (availableQuantity < quantity) {
+        await session.abortTransaction();
+        session.endSession();
         return "Event quantity not enough";
       }
       const now = Date.now();

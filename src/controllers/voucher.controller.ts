@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { VoucherService } from "../services/voucher.service";
 import { BaseController } from "./base.controller";
-import { pushEmailToQueue } from "queues/bullQueue";
-import { UserService } from "services/user.service";
-import { renderTemplate } from "utils/renderTemplate";
+import { pushEmailToQueue } from "../queues/bullQueue";
+import { UserService } from "../services/user.service";
+import { renderTemplate } from "../utils/renderTemplate";
 
 export class VoucherController extends BaseController {
   constructor() {
@@ -32,6 +32,7 @@ export class VoucherController extends BaseController {
       );
       if (typeof vouchers === "string") {
         res.status(456).json({ message: vouchers });
+        return;
       }
       if ("email" in user) {
           if (Array.isArray(vouchers)) {
@@ -47,6 +48,7 @@ export class VoucherController extends BaseController {
       }
       if ("error" in user) {
         res.status(456).json({ message: user.error });
+        return;
       }
       res.status(201).json(vouchers);
     } catch (err: any) {
@@ -64,6 +66,7 @@ export class VoucherController extends BaseController {
       const voucher = await VoucherService.getById(voucherId);
       if ("error" in voucher) {
         res.status(400).json({ message: voucher.error });
+        return;
       }
       res.json(voucher);
       return;
@@ -71,6 +74,7 @@ export class VoucherController extends BaseController {
     const vouchers = await VoucherService.getList();
     if ("error" in vouchers) {
       res.status(400).json({ message: vouchers.error });
+      return;
     }
     res.json(vouchers);
   };
@@ -82,6 +86,7 @@ export class VoucherController extends BaseController {
     const voucher = await VoucherService.update(voucherId, req.body);
     if ("error" in voucher) {
       res.status(400).json({ message: voucher.error });
+      return;
     }
     res.json(voucher);
   };
